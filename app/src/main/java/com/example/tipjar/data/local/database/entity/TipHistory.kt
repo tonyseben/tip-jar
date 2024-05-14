@@ -1,4 +1,4 @@
-package com.example.tipjar.database.entity
+package com.example.tipjar.data.local.database.entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
