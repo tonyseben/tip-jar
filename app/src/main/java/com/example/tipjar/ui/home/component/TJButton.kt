@@ -1,14 +1,14 @@
-package com.example.tipjar.ui.component
+package com.example.tipjar.ui.home.component
 
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
-@Preview(showBackground = true)
-fun TJButton() {
-    Button(onClick = { /*TODO*/ }) {
+fun TJButton(onClick: () -> Unit) {
+    Button(
+        onClick = onClick
+    ) {
         Text(text = "Save Payment")
     }
 }

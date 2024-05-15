@@ -1,4 +1,4 @@
-package com.example.tipjar.ui.component
+package com.example.tipjar.ui.home.component
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -13,28 +13,27 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 @Preview(showBackground = true)
-fun NumberPicker(label: String = "", start: Int = 0) {
-    var count = start
-
+fun NumberPicker(label: String = "", start: String = "0", onClick: (Char) -> Unit = {}) {
     Column {
         Text(text = label)
         Row {
-            OpButton(operator = '+')
+            OpButton(operator = '+', onClick = onClick)
             Text(
-                text = count.toString(),
+                text = start,
                 modifier = Modifier.weight(1F),
                 textAlign = TextAlign.Center
             )
-            OpButton(operator = '-')
+            OpButton(operator = '-', onClick = onClick)
         }
     }
 }
 
 @Composable
-fun OpButton(operator: Char) {
+fun OpButton(operator: Char, onClick: (Char) -> Unit = {}) {
     Button(
         modifier = Modifier.size(24.dp),
-        onClick = { /*TODO*/ }) {
+        onClick = { onClick(operator) }
+    ) {
         Text(text = operator.toString())
     }
 }

@@ -1,4 +1,4 @@
-package com.example.tipjar.ui.component
+package com.example.tipjar.ui.home.component
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.material3.Checkbox
