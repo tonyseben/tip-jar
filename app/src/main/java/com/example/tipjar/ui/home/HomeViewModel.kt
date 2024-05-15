@@ -6,6 +6,7 @@ import com.example.tipjar.domain.usecase.SaveTipUseCase
 import com.example.tipjar.domain.usecase.UpdateReceiptUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import java.util.regex.Pattern
 import javax.inject.Inject
 
 @HiltViewModel
@@ -24,24 +25,11 @@ class HomeViewModel @Inject constructor(
     override fun handleEvents(event: HomeContract.Event) {
         when (event) {
 
-            is HomeContract.Event.OnAmountChange -> {
-                setState { copy(amount = event.amount) }
-                calculateTip()
-            }
+            is HomeContract.Event.OnAmountChange -> onAmountChanged(event.amount)
 
-            is HomeContract.Event.OnPersonCountChange -> {
-                setState {
-                    val count =
-                        if (event.operator == '+') persons.toInt() + 1 else persons.toInt() - 1
-                    copy(persons = count.toString())
-                }
-                calculateTip()
-            }
+            is HomeContract.Event.OnPersonCountChange -> onPersonCountChange(event.operator)
 
-            is HomeContract.Event.OnTipPercentChange -> {
-                setState { copy(tipPercentage = event.percent) }
-                calculateTip()
-            }
+            is HomeContract.Event.OnTipPercentChange -> onTipPercentChanged(event.percent)
 
             is HomeContract.Event.SaveTip -> {
                 viewModelScope.launch { saveTip(state.value.toTipData()) }
@@ -53,18 +41,55 @@ class HomeViewModel @Inject constructor(
         }
     }
 
+    private fun onAmountChanged(amount: String) {
+
+        val regex = Pattern.compile("^([1-9][0-9]*|0)?(\\.[0-9]{0,2})?\$")
+        if (amount == ".") {
+            setState { copy(amount = "0.") }
+        } else if (amount.isEmpty() || regex.matcher(amount).matches()) {
+            setState { copy(amount = amount) }
+        }
+        calculateTip()
+    }
+
+    private fun onPersonCountChange(operator: Char) {
+        setState {
+            var per = persons.toInt()
+            if (operator == '+' && per < 100) {
+                per++
+            } else if (operator == '-' && per > 1) {
+                per--
+            }
+            copy(persons = per.toString())
+        }
+        calculateTip()
+    }
+
+    private fun onTipPercentChanged(percent: String) {
+
+        val regex = Pattern.compile("\\b(?:[0-9]?[0-9]|100)\\b")
+        if (percent.isEmpty()) {
+            setState { copy(tipPercentage = percent) }
+        } else if (regex.matcher(percent).matches()) {
+            setState { copy(tipPercentage = percent.toInt().toString()) }
+        }
+        calculateTip()
+    }
+
     private fun calculateTip() {
         setState {
-            if (amount.isEmpty() || tipPercentage.isEmpty()) {
+            if (amount.toDoubleOrNull() == null || tipPercentage.toIntOrNull() == null) {
                 copy(
                     totalTip = "0.0",
-                    perPersonTip = "0.0"
+                    perPersonTip = "0.0",
+                    isSaveEnabled = false
                 )
             } else {
                 val total = amount.toDouble() * tipPercentage.toDouble() / 100
                 copy(
                     totalTip = total.toString(),
-                    perPersonTip = (total / persons.toDouble()).toString()
+                    perPersonTip = "%.2f".format(total / persons.toInt()),
+                    isSaveEnabled = true
                 )
             }
         }

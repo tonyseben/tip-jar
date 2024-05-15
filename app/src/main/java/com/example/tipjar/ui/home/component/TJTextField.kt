@@ -22,12 +22,12 @@ import androidx.compose.ui.unit.sp
 @Composable
 @Preview(showBackground = true)
 fun TJTextField(
-    label: String = "Sample",
+    label: String = "Label",
     value: String = "",
+    hint: String = "Hint",
     onChange: ((String) -> Unit)? = null
 ) {
 
-    //val regex = Regex("\\d*(\\.\\d{1,2})")
     Column {
         Text(
             text = label,
@@ -37,11 +37,15 @@ fun TJTextField(
         )
         OutlinedTextField(
             value = value,
+            /*placeholder = {
+                Text(
+                    text = hint,
+                    fontSize = 36.sp
+                )
+            },*/
             onValueChange = {
                 if (onChange != null) {
-                    //if(it.matches(regex)){
                     onChange(it)
-                    //}
                 }
             },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),

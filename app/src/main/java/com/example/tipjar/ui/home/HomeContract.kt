@@ -8,9 +8,9 @@ import com.example.tipjar.domain.model.TipData
 class HomeContract {
     data class State(
         val currency: String = "USD",
-        val amount: String = "100.0",
+        val amount: String = "",
         val persons: String = "1",
-        val tipPercentage: String = "10",
+        val tipPercentage: String = "",
         val totalTip: String = "0.0",
         val perPersonTip: String = "0.0",
         val isReceipt: Boolean = false,

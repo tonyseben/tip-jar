@@ -14,16 +14,26 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun TJButton(onClick: () -> Unit) {
+fun TJButton(
+    isEnabled: Boolean,
+    onClick: () -> Unit
+) {
     Button(
         modifier = Modifier
             .fillMaxWidth()
             .background(
                 brush = Brush.verticalGradient(
-                    colors = listOf(
-                        Color(0xFFF27A0A),
-                        Color(0xFFD26E11),
-                    )
+                    colors = if (isEnabled) {
+                        listOf(
+                            Color(0xFFF27A0A),
+                            Color(0xFFD26E11),
+                        )
+                    } else {
+                        listOf(
+                            Color(0xFFF27A0A).copy(alpha = 0.5f),
+                            Color(0xFFD26E11).copy(alpha = 0.5f),
+                        )
+                    }
                 ),
                 shape = RoundedCornerShape(25)
             )

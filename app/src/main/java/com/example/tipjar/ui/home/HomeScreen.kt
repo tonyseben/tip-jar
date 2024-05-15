@@ -45,6 +45,7 @@ fun HomeScreen(navController: NavController) {
             TJTextField(
                 label = "Enter amount",
                 value = state.value.amount,
+                hint = "100.00",
                 onChange = {
                     viewModel.setEvent(HomeContract.Event.OnAmountChange(it))
                 }
@@ -61,6 +62,7 @@ fun HomeScreen(navController: NavController) {
             TJTextField(
                 label = "% TIP",
                 value = state.value.tipPercentage,
+                hint = "10",
                 onChange = {
                     viewModel.setEvent(HomeContract.Event.OnTipPercentChange(it))
                 }
@@ -111,6 +113,7 @@ fun HomeScreen(navController: NavController) {
                 ) {
                     TJCheckBox(label = "Take photo of receipt")
                     TJButton(
+                        isEnabled = state.value.isSaveEnabled,
                         onClick = {
                             viewModel.setEvent(HomeContract.Event.SaveTip)
                         }
