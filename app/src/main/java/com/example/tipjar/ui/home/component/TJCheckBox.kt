@@ -9,7 +9,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.sp
 
 @Composable
 @Preview(showBackground = true)
@@ -19,7 +21,15 @@ fun TJCheckBox(label: String = "") {
     Row(
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Checkbox(checked = checked, onCheckedChange = { checked = it })
-        Text(text = label)
+        Checkbox(
+            checked = checked,
+            onCheckedChange = { checked = it }
+        )
+
+        Text(
+            text = label,
+            fontSize = 13.sp,
+            fontWeight = FontWeight.Bold
+        )
     }
 }

@@ -1,13 +1,20 @@
 package com.example.tipjar.ui.home.component
 
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.LocalTextStyle
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -21,26 +28,35 @@ fun TJTextField(
 ) {
 
     //val regex = Regex("\\d*(\\.\\d{1,2})")
-    TextField(
-        value = value,
-        onValueChange = {
-            if (onChange != null) {
-                //if(it.matches(regex)){
-                onChange(it)
-                //}
-            }
-        },
-        label = {
-            Text(
-                text = label,
-                modifier = Modifier.padding(bottom = 4.dp),
-                fontSize = 12.sp
-            )
-        },
-        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
-        textStyle = TextStyle(
-            fontSize = 12.sp
-        ),
-        singleLine = true
-    )
+    Column {
+        Text(
+            text = label,
+            modifier = Modifier.padding(bottom = 4.dp),
+            fontSize = 13.sp,
+            fontWeight = FontWeight.Bold
+        )
+        OutlinedTextField(
+            value = value,
+            onValueChange = {
+                if (onChange != null) {
+                    //if(it.matches(regex)){
+                    onChange(it)
+                    //}
+                }
+            },
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
+            modifier = Modifier.fillMaxWidth(),
+            textStyle = LocalTextStyle.current.copy(
+                textAlign = TextAlign.Center,
+                fontSize = 36.sp
+            ),
+            colors = OutlinedTextFieldDefaults.colors(
+                focusedBorderColor = Color(0xFFF27A0A),
+                unfocusedBorderColor = Color(0xFFD2D2D2)
+            ),
+            shape = RoundedCornerShape(12.dp),
+            singleLine = true
+        )
+    }
+
 }
