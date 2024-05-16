@@ -30,14 +30,14 @@ fun HomeScreen(navController: NavController) {
     val state = viewModel.state.collectAsState()
 
     Scaffold(
-        topBar = { HomeTopBar() },
+        topBar = { HomeTopBar(navController) },
     ) { padding ->
         Column(
             modifier = Modifier.padding(
                 start = 24.dp,
                 top = padding.calculateTopPadding(),
                 end = 24.dp,
-                bottom = padding.calculateBottomPadding()
+                bottom = padding.calculateBottomPadding() + 16.dp
             ),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {

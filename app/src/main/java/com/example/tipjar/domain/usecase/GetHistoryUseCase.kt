@@ -8,7 +8,7 @@ import javax.inject.Inject
 class GetHistoryUseCase @Inject constructor(
     private val tipRepository: TipRepository
 ) {
-    suspend operator fun invoke(tip: TipData): List<TipData> {
+    suspend operator fun invoke(): List<TipData> {
         return tipRepository.getAll().map { it.toTipData() }
     }
 }

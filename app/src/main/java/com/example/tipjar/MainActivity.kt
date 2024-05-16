@@ -12,6 +12,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.tipjar.ui.history.HistoryScreen
 import com.example.tipjar.ui.home.HomeScreen
 import com.example.tipjar.ui.theme.TipJarTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -41,7 +42,7 @@ fun TipJapApp() {
         startDestination = "home"
     ) {
         composable("home") { HomeScreen(navController) }
-        //composable("history") { HomeScreen(navController) }
+        composable("history") { HistoryScreen(navController) }
     }
 }
 

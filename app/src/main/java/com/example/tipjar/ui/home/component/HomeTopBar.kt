@@ -14,12 +14,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.example.tipjar.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 @Preview(showBackground = true)
-fun HomeTopBar() {
+fun HomeTopBar(navController: NavController) {
     TopAppBar(
         title = {
             Box(
@@ -35,7 +36,9 @@ fun HomeTopBar() {
             }
         },
         actions = {
-            IconButton(onClick = { /* Handle action icon click */ }) {
+            IconButton(onClick = {
+                navController.navigate("history")
+            }) {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_history),
                     contentDescription = "Settings"

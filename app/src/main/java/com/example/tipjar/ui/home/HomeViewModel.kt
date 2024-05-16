@@ -87,7 +87,7 @@ class HomeViewModel @Inject constructor(
             } else {
                 val total = amount.toDouble() * tipPercentage.toDouble() / 100
                 copy(
-                    totalTip = total.toString(),
+                    totalTip = "%.2f".format(total.toString()),
                     perPersonTip = "%.2f".format(total / persons.toInt()),
                     isSaveEnabled = true
                 )
