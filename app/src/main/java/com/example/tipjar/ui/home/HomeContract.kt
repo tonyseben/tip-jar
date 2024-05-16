@@ -25,7 +25,10 @@ class HomeContract {
         data object UpdateReceipt : Event()
     }
 
-    object SideEffect : UiSideEffect
+    sealed class SideEffect : UiSideEffect {
+        data object SaveTipSuccess : SideEffect()
+        data object SaveTipFailed : SideEffect()
+    }
 }
 
 fun HomeContract.State.toTipData() = TipData(

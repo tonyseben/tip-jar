@@ -31,9 +31,7 @@ class HomeViewModel @Inject constructor(
 
             is HomeContract.Event.OnTipPercentChange -> onTipPercentChanged(event.percent)
 
-            is HomeContract.Event.SaveTip -> {
-                viewModelScope.launch { saveTip(state.value.toTipData()) }
-            }
+            is HomeContract.Event.SaveTip -> saveTip()
 
             is HomeContract.Event.UpdateReceipt -> {
                 viewModelScope.launch { /*updateReceipt(event.receipt)*/ }
@@ -87,11 +85,20 @@ class HomeViewModel @Inject constructor(
             } else {
                 val total = amount.toDouble() * tipPercentage.toDouble() / 100
                 copy(
-                    totalTip = "%.2f".format(total.toString()),
+                    totalTip = "%.2f".format(total),
                     perPersonTip = "%.2f".format(total / persons.toInt()),
                     isSaveEnabled = true
                 )
             }
+        }
+    }
+
+    private fun saveTip() = viewModelScope.launch {
+        if (saveTip(state.value.toTipData())) {
+            setSideEffect(HomeContract.SideEffect.SaveTipSuccess)
+            setState { HomeContract.State() }
+        } else {
+            setSideEffect(HomeContract.SideEffect.SaveTipFailed)
         }
     }
 }

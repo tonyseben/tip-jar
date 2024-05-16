@@ -15,6 +15,7 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun TJButton(
+    label: String,
     isEnabled: Boolean,
     onClick: () -> Unit
 ) {
@@ -41,6 +42,6 @@ fun TJButton(
         colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent),
         onClick = onClick
     ) {
-        Text(text = "Save Payment")
+        Text(text = label)
     }
 }

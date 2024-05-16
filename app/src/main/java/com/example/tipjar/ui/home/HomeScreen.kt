@@ -1,5 +1,6 @@
 package com.example.tipjar.ui.home
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -10,9 +11,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -28,6 +31,26 @@ import com.example.tipjar.ui.home.component.TJTextField
 fun HomeScreen(navController: NavController) {
     val viewModel: HomeViewModel = hiltViewModel()
     val state = viewModel.state.collectAsState()
+    val context = LocalContext.current
+
+    LaunchedEffect(Unit) {
+        viewModel.effect.collect { event ->
+            when (event) {
+                HomeContract.SideEffect.SaveTipSuccess -> {
+                    Toast.makeText(context, "Transaction saved!", Toast.LENGTH_SHORT).show()
+                    navController.navigate("history")
+                }
+
+                HomeContract.SideEffect.SaveTipFailed -> {
+                    Toast.makeText(
+                        context,
+                        "Something went wrong. Could not save transaction.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+        }
+    }
 
     Scaffold(
         topBar = { HomeTopBar(navController) },
@@ -113,6 +136,7 @@ fun HomeScreen(navController: NavController) {
                 ) {
                     TJCheckBox(label = "Take photo of receipt")
                     TJButton(
+                        label = "Save Payment",
                         isEnabled = state.value.isSaveEnabled,
                         onClick = {
                             viewModel.setEvent(HomeContract.Event.SaveTip)

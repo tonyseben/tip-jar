@@ -8,7 +8,7 @@ import javax.inject.Inject
 class SaveTipUseCase @Inject constructor(
     private val tipRepository: TipRepository
 ) {
-    suspend operator fun invoke(tip: TipData) {
-        tipRepository.save(tip.toTipHistory())
+    suspend operator fun invoke(tip: TipData): Boolean {
+        return tipRepository.save(tip.toTipHistory())
     }
 }
