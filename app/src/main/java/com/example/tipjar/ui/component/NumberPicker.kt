@@ -1,5 +1,9 @@
 package com.example.tipjar.ui.component
 
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
+import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
@@ -10,8 +14,11 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -23,7 +30,12 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 @Preview(showBackground = true)
-fun NumberPicker(label: String = "", start: String = "0", onClick: (Char) -> Unit = {}) {
+fun NumberPicker(label: String = "", number: Int = 0, onClick: (Char) -> Unit = {}) {
+
+    var direction by remember { mutableIntStateOf(1) }
+    var oldNumber by remember { mutableIntStateOf(number) }
+    SideEffect { oldNumber = number }
+
     Column {
         Text(
             text = label,
@@ -33,14 +45,27 @@ fun NumberPicker(label: String = "", start: String = "0", onClick: (Char) -> Uni
         Row(
             verticalAlignment = Alignment.CenterVertically
         ) {
-            OpButton(operator = '+', onClick = onClick)
-            Text(
-                text = start,
+            OpButton(operator = '+', onClick = {
+                direction = 1
+                onClick(it)
+            })
+            AnimatedContent(
                 modifier = Modifier.weight(1F),
-                fontSize = 36.sp,
-                textAlign = TextAlign.Center
-            )
-            OpButton(operator = '-', onClick = onClick)
+                targetState = number,
+                transitionSpec = {
+                    slideInHorizontally { -it * direction } togetherWith slideOutHorizontally { it * direction }
+                }
+            ) { num ->
+                Text(
+                    text = num.toString(),
+                    fontSize = 36.sp,
+                    textAlign = TextAlign.Center
+                )
+            }
+            OpButton(operator = '-', onClick = {
+                direction = -1
+                onClick(it)
+            })
         }
     }
 }

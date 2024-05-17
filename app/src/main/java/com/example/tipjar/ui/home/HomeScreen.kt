@@ -87,7 +87,7 @@ fun HomeScreen(navController: NavController) {
 
             NumberPicker(
                 label = "How many people?",
-                start = state.value.persons,
+                number = state.value.persons.toInt(),
                 onClick = {
                     viewModel.setEvent(HomeContract.Event.OnPersonCountChange(it))
                 }
