@@ -7,6 +7,7 @@ import javax.inject.Inject
 interface TipRepository {
     suspend fun save(tipHistory: TipHistory): Boolean
     suspend fun updateReceipt(timestamp: Long, receiptUri: String): Boolean
+    suspend fun get(timestamp: Long): TipHistory
     suspend fun getAll(): List<TipHistory>
     suspend fun delete(tipHistory: TipHistory): Boolean
 }
@@ -22,6 +23,10 @@ class TipRepositoryImpl @Inject constructor(
 
     override suspend fun updateReceipt(timestamp: Long, receiptUri: String): Boolean {
         return tipHistoryDao.updateReceiptUri(timestamp, receiptUri) > 0
+    }
+
+    override suspend fun get(timestamp: Long): TipHistory {
+        return tipHistoryDao.read(timestamp)
     }
 
     override suspend fun getAll(): List<TipHistory> {

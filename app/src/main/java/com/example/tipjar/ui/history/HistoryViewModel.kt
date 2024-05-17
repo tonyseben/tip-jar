@@ -33,14 +33,12 @@ class HistoryViewModel @Inject constructor(
     }
 
     private fun TipData.toHistoryItem() = HistoryItemUiState(
+        timestamp = timestamp,
         dateTime = SimpleDateFormat("yyyy MMM d, HH:mm").format(Date(timestamp)).toString(),
         currency = currency,
         amount = amount.toString(),
-        pax = pax.toString(),
-        tipPercent = tipPercent.toString(),
         totalTip = "%.2f".format(amount * tipPercent / 100),
-        perPersonTip = "%.2f".format(amount * tipPercent / 100 / pax),
-        receiptUri = receiptUri,
+        receiptUri = receiptUri
     )
 
 }

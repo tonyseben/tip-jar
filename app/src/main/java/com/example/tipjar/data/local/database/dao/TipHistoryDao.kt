@@ -16,6 +16,9 @@ interface TipHistoryDao {
     suspend fun updateReceiptUri(timestamp: Long, receiptUri: String): Int
     // Returns number of rows updated.
 
+    @Query("SELECT * FROM tip_history WHERE timestamp == :timestamp")
+    suspend fun read(timestamp: Long): TipHistory
+
     @Query("SELECT * FROM tip_history ORDER BY timestamp DESC")
     suspend fun readAll(): List<TipHistory>
 

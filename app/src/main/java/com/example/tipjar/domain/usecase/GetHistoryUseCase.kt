@@ -11,4 +11,8 @@ class GetHistoryUseCase @Inject constructor(
     suspend operator fun invoke(): List<TipData> {
         return tipRepository.getAll().map { it.toTipData() }
     }
+
+    suspend operator fun invoke(timestamp: Long): TipData {
+        return tipRepository.get(timestamp).toTipData()
+    }
 }

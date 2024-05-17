@@ -1,5 +1,6 @@
 package com.example.tipjar.ui.history.component
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -21,11 +22,15 @@ import coil.request.ImageRequest
 import com.example.tipjar.ui.home.HistoryItemUiState
 
 @Composable
-fun HistoryItem(history: HistoryItemUiState) {
+fun HistoryItem(
+    history: HistoryItemUiState,
+    onClick: (Long) -> Unit
+) {
     Box(
         modifier = Modifier
             .padding(horizontal = 8.dp, vertical = 16.dp)
             .fillMaxWidth()
+            .clickable(onClick = { onClick(history.timestamp) })
     ) {
         Text(
             text = history.dateTime,
