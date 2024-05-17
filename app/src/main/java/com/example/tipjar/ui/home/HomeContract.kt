@@ -21,11 +21,13 @@ class HomeContract {
         data class OnAmountChange(val amount: String) : Event()
         data class OnPersonCountChange(val operator: Char) : Event()
         data class OnTipPercentChange(val percent: String) : Event()
+        data object OnReceiptChange : Event()
         data object SaveTip : Event()
         data object UpdateReceipt : Event()
     }
 
     sealed class SideEffect : UiSideEffect {
+        data class CaptureReceipt(val timestamp: Long) : SideEffect()
         data object SaveTipSuccess : SideEffect()
         data object SaveTipFailed : SideEffect()
     }

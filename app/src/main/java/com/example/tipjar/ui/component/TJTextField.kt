@@ -1,4 +1,4 @@
-package com.example.tipjar.ui.home.component
+package com.example.tipjar.ui.component
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth

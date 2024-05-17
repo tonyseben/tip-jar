@@ -21,11 +21,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.example.tipjar.ui.component.NumberPicker
+import com.example.tipjar.ui.component.TJButton
+import com.example.tipjar.ui.component.TJCheckBox
+import com.example.tipjar.ui.component.TJTextField
 import com.example.tipjar.ui.home.component.HomeTopBar
-import com.example.tipjar.ui.home.component.NumberPicker
-import com.example.tipjar.ui.home.component.TJButton
-import com.example.tipjar.ui.home.component.TJCheckBox
-import com.example.tipjar.ui.home.component.TJTextField
 
 @Composable
 fun HomeScreen(navController: NavController) {
@@ -34,8 +34,8 @@ fun HomeScreen(navController: NavController) {
     val context = LocalContext.current
 
     LaunchedEffect(Unit) {
-        viewModel.effect.collect { event ->
-            when (event) {
+        viewModel.effect.collect { effect ->
+            when (effect) {
                 HomeContract.SideEffect.SaveTipSuccess -> {
                     Toast.makeText(context, "Transaction saved!", Toast.LENGTH_SHORT).show()
                     navController.navigate("history")
@@ -47,6 +47,13 @@ fun HomeScreen(navController: NavController) {
                         "Something went wrong. Could not save transaction.",
                         Toast.LENGTH_SHORT
                     ).show()
+                }
+
+                is HomeContract.SideEffect.CaptureReceipt -> {
+                    navController.currentBackStackEntry?.arguments?.apply {
+                        putLong("timestamp", effect.timestamp)
+                    }
+                    navController.navigate("camera/" + effect.timestamp)
                 }
             }
         }
@@ -134,7 +141,13 @@ fun HomeScreen(navController: NavController) {
                 Column(
                     verticalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
-                    TJCheckBox(label = "Take photo of receipt")
+                    TJCheckBox(
+                        label = "Take photo of receipt",
+                        isChecked = state.value.isReceipt,
+                        onCheckedChange = {
+                            viewModel.setEvent(HomeContract.Event.OnReceiptChange)
+                        }
+                    )
                     TJButton(
                         label = "Save Payment",
                         isEnabled = state.value.isSaveEnabled,

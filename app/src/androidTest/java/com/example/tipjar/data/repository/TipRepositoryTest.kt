@@ -62,12 +62,12 @@ class TipRepositoryTest {
     fun updateTipHistory_retrievesReceiptUri() = runTest {
         // Given
         val tipHistory = TipHistory(1000, "USD", 200.0, 2, 10, null)
+        val timestamp = 1000L
         val receiptUri = "https://example.com/receipt.pdf"
 
         // When
         repository.save(tipHistory)
-        val tipHistory2 = tipHistory.copy(receiptUri = receiptUri)
-        repository.updateReceipt(tipHistory2)
+        repository.updateReceipt(timestamp, receiptUri)
 
         // Then
         val retrievedTipHistory = repository.getAll().first()

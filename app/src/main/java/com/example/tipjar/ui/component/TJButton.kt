@@ -1,4 +1,4 @@
-package com.example.tipjar.ui.home.component
+package com.example.tipjar.ui.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -15,12 +15,13 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun TJButton(
+    modifier: Modifier = Modifier,
     label: String,
-    isEnabled: Boolean,
-    onClick: () -> Unit
+    isEnabled: Boolean = true,
+    onClick: () -> Unit = {}
 ) {
     Button(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .background(
                 brush = Brush.verticalGradient(

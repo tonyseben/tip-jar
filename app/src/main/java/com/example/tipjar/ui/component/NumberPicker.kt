@@ -1,4 +1,4 @@
-package com.example.tipjar.ui.home.component
+package com.example.tipjar.ui.component
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.interaction.MutableInteractionSource

@@ -9,9 +9,12 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
+import com.example.tipjar.ui.camera.CameraScreen
 import com.example.tipjar.ui.history.HistoryScreen
 import com.example.tipjar.ui.home.HomeScreen
 import com.example.tipjar.ui.theme.TipJarTheme
@@ -43,6 +46,10 @@ fun TipJapApp() {
     ) {
         composable("home") { HomeScreen(navController) }
         composable("history") { HistoryScreen(navController) }
+        composable(
+            "camera/{timestamp}",
+            arguments = listOf(navArgument("timestamp") { type = NavType.LongType })
+        ) { CameraScreen(navController) }
     }
 }
 

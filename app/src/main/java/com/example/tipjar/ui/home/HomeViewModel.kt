@@ -31,11 +31,14 @@ class HomeViewModel @Inject constructor(
 
             is HomeContract.Event.OnTipPercentChange -> onTipPercentChanged(event.percent)
 
-            is HomeContract.Event.SaveTip -> saveTip()
+            is HomeContract.Event.OnReceiptChange -> setState { copy(isReceipt = !isReceipt) }
+
+            is HomeContract.Event.SaveTip -> submitTip()
 
             is HomeContract.Event.UpdateReceipt -> {
                 viewModelScope.launch { /*updateReceipt(event.receipt)*/ }
             }
+
         }
     }
 
@@ -93,9 +96,14 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    private fun saveTip() = viewModelScope.launch {
-        if (saveTip(state.value.toTipData())) {
-            setSideEffect(HomeContract.SideEffect.SaveTipSuccess)
+    private fun submitTip() = viewModelScope.launch {
+        val timestamp = saveTip(state.value.toTipData())
+        if (timestamp > 0) {
+            if (state.value.isReceipt) {
+                setSideEffect(HomeContract.SideEffect.CaptureReceipt(timestamp))
+            } else {
+                setSideEffect(HomeContract.SideEffect.SaveTipSuccess)
+            }
             setState { HomeContract.State() }
         } else {
             setSideEffect(HomeContract.SideEffect.SaveTipFailed)
