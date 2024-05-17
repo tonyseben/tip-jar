@@ -48,7 +48,7 @@ class TipRepositoryTest {
     @Test
     fun saveTipHistory_retrievesTipHistory() = runTest {
         // Given
-        val tipHistory = TipHistory(1000, "USD", 200.0, 2, 10, null)
+        val tipHistory = TipHistory(1000, "$", 200.0, 2, 10, null)
 
         // When
         repository.save(tipHistory)
@@ -61,7 +61,7 @@ class TipRepositoryTest {
     @Test
     fun updateTipHistory_retrievesReceiptUri() = runTest {
         // Given
-        val tipHistory = TipHistory(1000, "USD", 200.0, 2, 10, null)
+        val tipHistory = TipHistory(1000, "$", 200.0, 2, 10, null)
         val timestamp = 1000L
         val receiptUri = "https://example.com/receipt.pdf"
 
@@ -77,7 +77,7 @@ class TipRepositoryTest {
     @Test
     fun deleteTipHistory_deletesTipHistory() = runTest {
         // Given
-        val tipHistory = TipHistory(1000, "USD", 200.0, 2, 10, null)
+        val tipHistory = TipHistory(1000, "$", 200.0, 2, 10, null)
         repository.save(tipHistory)
 
         // When

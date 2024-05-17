@@ -38,7 +38,7 @@ class TipHistoryDaoTest {
     fun saveTipHistory() = runTest {
 
         // Given
-        val tipHistory = TipHistory(1000, "USD", 200.0, 2, 10, null)
+        val tipHistory = TipHistory(1000, "$", 200.0, 2, 10, null)
         // When
         tipHistoryDao.insert(tipHistory)
         // Then
@@ -50,7 +50,7 @@ class TipHistoryDaoTest {
     fun updateTipHistory() = runTest {
 
         // Given
-        val tipHistory = TipHistory(1000, "USD", 200.0, 2, 10, null)
+        val tipHistory = TipHistory(1000, "$", 200.0, 2, 10, null)
         // When
         tipHistoryDao.insert(tipHistory)
         tipHistoryDao.updateReceiptUri(1000, "test-uri")
@@ -62,7 +62,7 @@ class TipHistoryDaoTest {
     fun deleteTipHistory() = runTest {
 
         // Given
-        val tipHistory = TipHistory(1000, "USD", 200.0, 2, 10, null)
+        val tipHistory = TipHistory(1000, "$", 200.0, 2, 10, null)
         // When
         tipHistoryDao.insert(tipHistory)
         tipHistoryDao.delete(1000)

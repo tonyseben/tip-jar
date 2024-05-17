@@ -41,13 +41,13 @@ fun HistoryItem(
             fontWeight = FontWeight.Bold
         )
         Text(
-            text = history.amount,
+            text = "${history.currency}${history.amount}",
             modifier = Modifier.align(Alignment.BottomStart),
             fontSize = 20.sp,
             fontWeight = FontWeight.Bold
         )
         Text(
-            text = "Tip: " + history.totalTip,
+            text = "Tip: ${history.currency}${history.totalTip}",
             modifier = Modifier
                 .align(Alignment.BottomCenter)
                 .alpha(0.5F),

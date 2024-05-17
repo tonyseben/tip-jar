@@ -108,13 +108,13 @@ fun HistoryDetailScreen(navController: NavController, timestamp: Long, onDismiss
                         fontWeight = FontWeight.Bold
                     )
                     Text(
-                        text = state.value.amount,
+                        text = "${state.value.currency}${state.value.amount}",
                         modifier = Modifier.align(Alignment.BottomStart),
                         fontSize = 20.sp,
                         fontWeight = FontWeight.Bold
                     )
                     Text(
-                        text = "Tip: " + state.value.totalTip,
+                        text = "Tip: ${state.value.currency}${state.value.totalTip}",
                         modifier = Modifier
                             .align(Alignment.BottomEnd)
                             .alpha(0.5F),

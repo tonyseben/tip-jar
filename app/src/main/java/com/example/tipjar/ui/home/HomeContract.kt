@@ -7,7 +7,7 @@ import com.example.tipjar.domain.model.TipData
 
 class HomeContract {
     data class State(
-        val currency: String = "USD",
+        val currency: String = "$",
         val amount: String = "",
         val persons: String = "1",
         val tipPercentage: String = "",
@@ -24,6 +24,7 @@ class HomeContract {
         data object OnReceiptChange : Event()
         data object SaveTip : Event()
         data object UpdateReceipt : Event()
+        data object ChangeCurrency : Event()
     }
 
     sealed class SideEffect : UiSideEffect {

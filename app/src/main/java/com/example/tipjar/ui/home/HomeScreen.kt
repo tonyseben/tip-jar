@@ -78,7 +78,11 @@ fun HomeScreen(navController: NavController) {
                 hint = "100.00",
                 onChange = {
                     viewModel.setEvent(HomeContract.Event.OnAmountChange(it))
-                }
+                },
+                leadChar = state.value.currency,
+                onLeadClick = {
+                    viewModel.setEvent(HomeContract.Event.ChangeCurrency)
+                },
             )
 
             NumberPicker(
@@ -95,7 +99,8 @@ fun HomeScreen(navController: NavController) {
                 hint = "10",
                 onChange = {
                     viewModel.setEvent(HomeContract.Event.OnTipPercentChange(it))
-                }
+                },
+                trailChar = "%"
             )
 
             Column(
@@ -111,7 +116,7 @@ fun HomeScreen(navController: NavController) {
                         fontWeight = FontWeight.Bold
                     )
                     Text(
-                        text = state.value.totalTip,
+                        text = "${state.value.currency} ${state.value.totalTip}",
                         fontSize = 13.sp,
                         fontWeight = FontWeight.Bold
                     )
@@ -127,7 +132,7 @@ fun HomeScreen(navController: NavController) {
                         fontWeight = FontWeight.Bold
                     )
                     Text(
-                        text = state.value.perPersonTip,
+                        text = "${state.value.currency} ${state.value.perPersonTip}",
                         fontSize = 18.sp,
                         fontWeight = FontWeight.Bold
                     )

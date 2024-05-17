@@ -18,6 +18,8 @@ class HomeViewModel @Inject constructor(
         HomeContract.State()
     ) {
 
+    var currencyIndex = 0
+
     init {
         calculateTip()
     }
@@ -39,6 +41,7 @@ class HomeViewModel @Inject constructor(
                 viewModelScope.launch { /*updateReceipt(event.receipt)*/ }
             }
 
+            HomeContract.Event.ChangeCurrency -> changeCurrency()
         }
     }
 
@@ -108,5 +111,11 @@ class HomeViewModel @Inject constructor(
         } else {
             setSideEffect(HomeContract.SideEffect.SaveTipFailed)
         }
+    }
+
+    private fun changeCurrency() {
+        val currencies = listOf("$", "₿", "¥", "€", "£", "₹")
+        currencyIndex = (currencyIndex + 1) % currencies.size
+        setState { copy(currency = currencies[currencyIndex]) }
     }
 }

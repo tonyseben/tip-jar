@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
@@ -25,7 +26,11 @@ fun TJTextField(
     label: String = "Label",
     value: String = "",
     hint: String = "Hint",
-    onChange: ((String) -> Unit)? = null
+    onChange: ((String) -> Unit) = {},
+    leadChar: String? = null,
+    onLeadClick: () -> Unit = {},
+    trailChar: String? = null,
+    onTrailClick: () -> Unit = {},
 ) {
 
     Column {
@@ -37,17 +42,27 @@ fun TJTextField(
         )
         OutlinedTextField(
             value = value,
-            /*placeholder = {
-                Text(
-                    text = hint,
-                    fontSize = 36.sp
-                )
-            },*/
-            onValueChange = {
-                if (onChange != null) {
-                    onChange(it)
+            leadingIcon = {
+                if (leadChar != null) {
+                    IconButton(onClick = onLeadClick) {
+                        Text(
+                            text = leadChar,
+                            fontSize = 24.sp
+                        )
+                    }
                 }
             },
+            trailingIcon = {
+                if (trailChar != null) {
+                    IconButton(onClick = onTrailClick) {
+                        Text(
+                            text = trailChar,
+                            fontSize = 24.sp
+                        )
+                    }
+                }
+            },
+            onValueChange = { onChange(it) },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
             modifier = Modifier.fillMaxWidth(),
             textStyle = LocalTextStyle.current.copy(
