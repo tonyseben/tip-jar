@@ -1,6 +1,7 @@
 package com.example.tipjar.ui.home
 
 import android.widget.Toast
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -15,7 +16,9 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -30,6 +33,8 @@ import com.example.tipjar.ui.home.component.HomeTopBar
 @Composable
 fun HomeScreen(navController: NavController) {
     val context = LocalContext.current
+    val focusManager = LocalFocusManager.current
+
     val viewModel: HomeViewModel = hiltViewModel()
     val state = viewModel.state.collectAsState()
 
@@ -85,12 +90,18 @@ fun HomeScreen(navController: NavController) {
         topBar = { HomeTopBar(navController) },
     ) { padding ->
         Column(
-            modifier = Modifier.padding(
-                start = 24.dp,
-                top = padding.calculateTopPadding(),
-                end = 24.dp,
-                bottom = padding.calculateBottomPadding() + 16.dp
-            ),
+            modifier = Modifier
+                .padding(
+                    start = 24.dp,
+                    top = padding.calculateTopPadding(),
+                    end = 24.dp,
+                    bottom = padding.calculateBottomPadding() + 16.dp
+                )
+                .pointerInput(Unit) {
+                    detectTapGestures(onTap = {
+                        focusManager.clearFocus()
+                    })
+                },
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
 

@@ -3,7 +3,6 @@ package com.example.tipjar.ui.home
 import androidx.lifecycle.viewModelScope
 import com.example.tipjar.BaseViewModel
 import com.example.tipjar.domain.usecase.SaveTipUseCase
-import com.example.tipjar.domain.usecase.UpdateReceiptUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import java.util.regex.Pattern
@@ -11,8 +10,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val saveTip: SaveTipUseCase,
-    private val updateReceipt: UpdateReceiptUseCase
+    private val saveTip: SaveTipUseCase
 ) :
     BaseViewModel<HomeContract.State, HomeContract.Event, HomeContract.SideEffect>(
         HomeContract.State()

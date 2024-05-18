@@ -41,7 +41,8 @@ fun TJButton(
             )
             .size(width = 48.dp, height = 48.dp),
         colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent),
-        onClick = onClick
+        onClick = onClick,
+        enabled = isEnabled
     ) {
         Text(text = label)
     }
