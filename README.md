@@ -1,4 +1,25 @@
 # TipJar
+
+### NOTES From the candidate: Tony Sebastian Bento
+
+<img src="screenshots%2FHome-light.jpg" height="300">        <img src="screenshots%2FHome-dark.jpg" height="300">
+
+### Implementation Details
+
+- App implemeted with MVVM, Hilt, Jetpack compose.
+- Libraries updated to latest versions.
+- Test cases for repository classes and model.
+
+#### Bonus Implementions:
+
+- Delete receipts: Swipe right on list item to delete.
+- Change currenct: Tap on currency icon in text field to change currency.
+- Minor animations.
+
+<iframe width="560" height="315" src="https://drive.google.com/file/d/13VatpDyVfqw4g-qmdMi8dmDDR1sQic8O/view?usp=sharing" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+=============================================================================
+
 Android Coding Assignment
 
 Please follow the instructions below to complete this portion of the interview. 
