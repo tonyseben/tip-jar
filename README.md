@@ -6,14 +6,14 @@
 
 ### Implementation Details
 
+- Click here
+  to [Watch Demo Video](https://drive.google.com/file/d/13VatpDyVfqw4g-qmdMi8dmDDR1sQic8O/view?usp=sharing)
 - App implemeted with MVVM, Hilt, Jetpack compose.
 - Libraries updated to latest versions.
 - Test cases for repository classes and model.
 
 #### Bonus Implementions:
 
-- Click here
-  to [Watch Demo Video](https://drive.google.com/file/d/13VatpDyVfqw4g-qmdMi8dmDDR1sQic8O/view?usp=sharing)
 - Delete receipts: Swipe right on list item to delete.
 - Change currenct: Tap on currency icon in text field to change currency.
 - Minor animations.
