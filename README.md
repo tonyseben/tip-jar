@@ -16,9 +16,20 @@
 
 - Delete receipts: Swipe right on list item to delete.
 - Change currenct: Tap on currency icon in text field to change currency.
+- Support for Light and Dark mode.
 - Minor animations.
 
-=============================================================================
+#### Usages of AI in the assignment:
+
+- Heavy usage:
+    1. Capture photo using CameraX and Jetpack compose.
+    2. Swipe-to-delete functionality.
+    3. Writing test cases.
+- Light usage:
+    1. Help with bug fixes.
+    2. Minor implementational details and best practices.
+
+=============================================================================================================================
 
 Android Coding Assignment
 
