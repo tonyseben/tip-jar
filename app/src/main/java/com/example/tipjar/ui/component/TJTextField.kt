@@ -1,5 +1,7 @@
 package com.example.tipjar.ui.component
 
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.collectIsFocusedAsState
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -11,7 +13,10 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
@@ -23,15 +28,17 @@ import androidx.compose.ui.unit.sp
 @Composable
 @Preview(showBackground = true)
 fun TJTextField(
-    label: String = "Label",
+    label: String = "",
     value: String = "",
-    hint: String = "Hint",
+    hint: String = "",
     onChange: ((String) -> Unit) = {},
     leadChar: String? = null,
     onLeadClick: () -> Unit = {},
     trailChar: String? = null,
     onTrailClick: () -> Unit = {},
 ) {
+    val interactionSource = remember { MutableInteractionSource() }
+    val isFocused by interactionSource.collectIsFocusedAsState()
 
     Column {
         Text(
@@ -42,6 +49,18 @@ fun TJTextField(
         )
         OutlinedTextField(
             value = value,
+            placeholder = {
+                if (!isFocused) {
+                    Text(
+                        text = hint,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .alpha(0.5f),
+                        textAlign = TextAlign.Center,
+                        fontSize = 36.sp
+                    )
+                }
+            },
             leadingIcon = {
                 if (leadChar != null) {
                     IconButton(onClick = onLeadClick) {
@@ -74,7 +93,8 @@ fun TJTextField(
                 unfocusedBorderColor = Color(0xFFD2D2D2)
             ),
             shape = RoundedCornerShape(12.dp),
-            singleLine = true
+            singleLine = true,
+            interactionSource = interactionSource,
         )
     }
 
