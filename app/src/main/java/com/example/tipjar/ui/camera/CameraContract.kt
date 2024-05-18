@@ -14,7 +14,7 @@ class CameraContract {
     sealed class Event : UiEvent {
         data class OnPhotoTaken(val bitmap: Bitmap) : Event()
         data object OnDiscardClick : Event()
-        data class SaveReceipt(val receiptImagePath: String) : Event()
+        data class SaveReceipt(val receiptImagePath: String?) : Event()
     }
 
     sealed class SideEffect : UiSideEffect {

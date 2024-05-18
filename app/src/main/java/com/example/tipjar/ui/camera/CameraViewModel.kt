@@ -34,10 +34,13 @@ class CameraViewModel @Inject constructor(
         }
     }
 
-    private fun saveReceipt(receiptImagePath: String) = viewModelScope.launch {
+    private fun saveReceipt(receiptImagePath: String?) = viewModelScope.launch {
 
         if (state.value.timestamp == 0L) {
             throw Exception("Something went wrong. Could not save receipt. Identifier timestamp not set.")
+        }
+        if (receiptImagePath == null) {
+            throw Exception("Something went wrong. Could not save receipt. Filename not set.")
         }
         if (updateReceipt(state.value.timestamp, receiptImagePath)) {
             setSideEffect(CameraContract.SideEffect.ReceiptSaveSuccess)

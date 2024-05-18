@@ -29,9 +29,31 @@ import com.example.tipjar.ui.home.component.HomeTopBar
 
 @Composable
 fun HomeScreen(navController: NavController) {
+    val context = LocalContext.current
     val viewModel: HomeViewModel = hiltViewModel()
     val state = viewModel.state.collectAsState()
-    val context = LocalContext.current
+
+    navController.currentBackStackEntry?.savedStateHandle?.let {
+        if (it.contains("isReceiptSaved")) {
+            val isReceiptSaved = it.get<Boolean>("isReceiptSaved")
+            it.remove<Boolean>("isReceiptSaved")
+
+            isReceiptSaved?.let { saved ->
+                if (saved) {
+                    Toast.makeText(context, "Transaction saved!", Toast.LENGTH_SHORT).show()
+                    navController.navigate("history")
+                } else {
+                    Toast.makeText(
+                        context,
+                        "Transaction saved! But, receipt not captured.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    navController.navigate("history")
+                }
+            }
+        }
+    }
+
 
     LaunchedEffect(Unit) {
         viewModel.effect.collect { effect ->
