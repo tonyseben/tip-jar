@@ -11,8 +11,10 @@ class HistoryContract {
     ) : UiState
 
     sealed class Event : UiEvent {
-        data class OnItemClick(val item: HistoryItemUiState) : Event()
+        data class Delete(val position: Int) : Event()
     }
 
-    object SideEffect : UiSideEffect
+    sealed class SideEffect : UiSideEffect {
+        data object DeleteSuccess : SideEffect()
+    }
 }

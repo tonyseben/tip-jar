@@ -9,7 +9,7 @@ interface TipRepository {
     suspend fun updateReceipt(timestamp: Long, receiptUri: String): Boolean
     suspend fun get(timestamp: Long): TipHistory
     suspend fun getAll(): List<TipHistory>
-    suspend fun delete(tipHistory: TipHistory): Boolean
+    suspend fun delete(timestamp: Long): Boolean
 }
 
 
@@ -33,8 +33,8 @@ class TipRepositoryImpl @Inject constructor(
         return tipHistoryDao.readAll()
     }
 
-    override suspend fun delete(tipHistory: TipHistory): Boolean {
-        return tipHistoryDao.delete(tipHistory.timestamp) > 0
+    override suspend fun delete(timestamp: Long): Boolean {
+        return tipHistoryDao.delete(timestamp) > 0
     }
 
 }

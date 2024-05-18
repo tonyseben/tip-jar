@@ -8,11 +8,11 @@
     <string name="labelPaxTip">Per Person</string>
     <string name="labelTakePhoto">Take photo of receipt</string>
     <string name="actionSavePayment">Save Payment</string>
-    <string name="statusTransactSaved">Transaction saved!</string>
-    <string name="statusTransactSavedNoReceipt">Transaction saved! But, receipt not captured.</string>
-    <string name="statusTransactSaveFailed">Something went wrong. Could not save transaction.</string>
+    <string name="statusTransactSaved">Payment saved!</string>
+    <string name="statusTransactSavedNoReceipt">Payment saved! But, receipt not captured.</string>
+    <string name="statusTransactSaveFailed">Something went wrong. Could not save payment.</string>
     <string name="cdAppLogo">TipJar logo</string>
-    <string name="cdGotoHistory">Go to history of transactions</string>
+    <string name="cdGotoHistory">Go to history of payments</string>
 
     <string name="titleHistory">SAVED PAYMENTS</string>
     <string name="tipValue">Tip: %1$s%2$s</string>
@@ -23,4 +23,7 @@
     <string name="cdCapturePhoto">Capture photo of receipt</string>
     <string name="actionRetake">Retake</string>
     <string name="actionSaveReceipt">Save Receipt</string>
+    <string name="cdDeleteTransaction">Delete payment</string>
+    <string name="statusTransactDeleted">Payment deleted!</string>
+    <string name="messageNoHistory">No payments yet.</string>
 </resources>
