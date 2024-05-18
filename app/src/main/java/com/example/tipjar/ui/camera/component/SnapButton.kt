@@ -11,16 +11,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.tipjar.R
+import com.example.tipjar.ui.theme.offWhite
+import com.example.tipjar.ui.theme.orange
 
 @Composable
 fun SnapButton(modifier: Modifier, onClick: () -> Unit = {}) {
     val interactionSource = remember { MutableInteractionSource() }
     val isPressed by interactionSource.collectIsPressedAsState()
-    val borderColor = if (isPressed) Color(0xFFF27A0A) else Color(0xFFD2D2D2)
+    val borderColor = if (isPressed) orange else offWhite
 
     OutlinedButton(
         modifier = modifier.size(72.dp),
@@ -31,7 +33,7 @@ fun SnapButton(modifier: Modifier, onClick: () -> Unit = {}) {
     ) {
         Icon(
             painter = painterResource(id = R.drawable.ic_camera),
-            contentDescription = "Take photo of receipt"
+            contentDescription = stringResource(R.string.cdCapturePhoto)
         )
     }
 }

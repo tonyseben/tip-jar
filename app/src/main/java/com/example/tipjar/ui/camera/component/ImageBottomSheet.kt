@@ -15,7 +15,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.asImageBitmap
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.example.tipjar.R
 import com.example.tipjar.ui.component.TJButton
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -49,7 +51,7 @@ fun ImageBottomSheet(
                     .align(Alignment.BottomStart)
             ) {
                 TJButton(
-                    label = "Retake",
+                    label = stringResource(R.string.actionRetake),
                     isEnabled = !isProgress,
                     onClick = onDiscardClick,
                     modifier = Modifier
@@ -57,7 +59,7 @@ fun ImageBottomSheet(
                         .padding(8.dp)
                 )
                 TJButton(
-                    label = "Save Receipt",
+                    label = stringResource(R.string.actionSaveReceipt),
                     isEnabled = !isProgress,
                     onClick = onSaveClick,
                     modifier = Modifier

@@ -15,11 +15,13 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.tipjar.R
+import com.example.tipjar.ui.theme.offWhite
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -28,13 +30,9 @@ fun HistoryTopBar(navController: NavController) {
 
     Column {
         CenterAlignedTopAppBar(
-            /*colors = TopAppBarDefaults.topAppBarColors(
-            containerColor = MaterialTheme.colorScheme.primaryContainer,
-            titleContentColor = MaterialTheme.colorScheme.primary,
-        ),*/
             title = {
                 Text(
-                    text = "SAVED PAYMENTS",
+                    text = stringResource(R.string.titleHistory),
                     fontSize = 13.sp,
                     fontWeight = FontWeight.Bold
                 )
@@ -45,18 +43,10 @@ fun HistoryTopBar(navController: NavController) {
                 }) {
                     Icon(
                         imageVector = Icons.AutoMirrored.Filled.KeyboardArrowLeft,
-                        contentDescription = "Navigate back"
+                        contentDescription = stringResource(R.string.cdNavigateBack)
                     )
                 }
             },
-            /*actions = {
-            IconButton(onClick = { }) {
-                Icon(
-                    imageVector = Icons.Filled.Menu,
-                    contentDescription = ""
-                )
-            }
-        },*/
             scrollBehavior = scrollBehavior,
         )
 
@@ -64,7 +54,7 @@ fun HistoryTopBar(navController: NavController) {
             modifier = Modifier
                 .height(1.dp)
                 .fillMaxWidth(),
-            color = Color(0xFFD2D2D2)
+            color = offWhite
         )
     }
 }

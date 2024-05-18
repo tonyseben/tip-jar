@@ -185,7 +185,7 @@ private fun takePhoto(
 
             override fun onError(exception: ImageCaptureException) {
                 super.onError(exception)
-                Log.e("Camera", "Couldn't take photo: ", exception)
+                Log.e("CameraScreen", "Couldn't take photo: ", exception)
             }
         }
     )
@@ -196,8 +196,6 @@ fun saveBitmapToInternalStorage(
     bitmap: Bitmap,
     fileName: String?
 ): Flow<String?> = flow {
-
-    Log.d("TEST", "saveBitmapToInternalStorage $fileName")
 
     val directory = File(context.filesDir, "images")
     if (!directory.exists()) {
@@ -221,6 +219,5 @@ fun saveBitmapToInternalStorage(
             fileOutputStream?.close()
         }
     }
-    Log.d("TEST", "saveBitmapToInternalStorage $path")
     emit(path)
 }.flowOn(Dispatchers.IO)

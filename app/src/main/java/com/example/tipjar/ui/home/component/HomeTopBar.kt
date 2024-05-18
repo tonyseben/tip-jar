@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.tipjar.R
@@ -27,7 +28,7 @@ fun HomeTopBar(navController: NavController) {
             ) {
                 Image(
                     painter = painterResource(id = R.drawable.tipjar_logo),
-                    contentDescription = "TipJar logo",
+                    contentDescription = stringResource(R.string.cdAppLogo),
                     modifier = Modifier.size(130.dp)
 
                 )
@@ -39,7 +40,7 @@ fun HomeTopBar(navController: NavController) {
             }) {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_history),
-                    contentDescription = "History"
+                    contentDescription = stringResource(R.string.cdGotoHistory)
                 )
             }
         }

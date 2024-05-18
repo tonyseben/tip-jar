@@ -1,3 +1,26 @@
 <resources>
     <string name="app_name">TipJar</string>
+
+    <string name="labelAmount">Enter amount</string>
+    <string name="labelPax">How many people?</string>
+    <string name="labelTipPercent">% TIP</string>
+    <string name="labelTotalTip">Total Tip</string>
+    <string name="labelPaxTip">Per Person</string>
+    <string name="labelTakePhoto">Take photo of receipt</string>
+    <string name="actionSavePayment">Save Payment</string>
+    <string name="statusTransactSaved">Transaction saved!</string>
+    <string name="statusTransactSavedNoReceipt">Transaction saved! But, receipt not captured.</string>
+    <string name="statusTransactSaveFailed">Something went wrong. Could not save transaction.</string>
+    <string name="cdAppLogo">TipJar logo</string>
+    <string name="cdGotoHistory">Go to history of transactions</string>
+
+    <string name="titleHistory">SAVED PAYMENTS</string>
+    <string name="tipValue">Tip: %1$s%2$s</string>
+    <string name="messageNoReceipt">No Receipt image available</string>
+    <string name="cdReceiptImage">Photo of receipt</string>
+    <string name="cdCamera">Open camera</string>
+    <string name="cdNavigateBack">Navigate back</string>
+    <string name="cdCapturePhoto">Capture photo of receipt</string>
+    <string name="actionRetake">Retake</string>
+    <string name="actionSaveReceipt">Save Receipt</string>
 </resources>

@@ -14,11 +14,12 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
+import com.example.tipjar.R
 import com.example.tipjar.ui.home.HistoryItemUiState
 
 @Composable
@@ -36,23 +37,18 @@ fun HistoryItem(
             text = history.dateTime,
             modifier = Modifier
                 .padding(bottom = 4.dp)
-                .align(Alignment.TopStart),
-            fontSize = 13.sp,
-            fontWeight = FontWeight.Bold
+                .align(Alignment.TopStart)
         )
         Text(
             text = "${history.currency}${history.amount}",
             modifier = Modifier.align(Alignment.BottomStart),
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Bold
+            fontSize = 20.sp
         )
         Text(
-            text = "Tip: ${history.currency}${history.totalTip}",
+            text = stringResource(R.string.tipValue, history.currency, history.totalTip),
             modifier = Modifier
                 .align(Alignment.BottomCenter)
-                .alpha(0.5F),
-            fontSize = 13.sp,
-            fontWeight = FontWeight.Bold
+                .alpha(0.5F)
         )
 
         Box(
@@ -67,7 +63,7 @@ fun HistoryItem(
                     model = ImageRequest.Builder(LocalContext.current)
                         .data(receiptUri)
                         .build(),
-                    contentDescription = "Receipt",
+                    contentDescription = stringResource(R.string.cdReceiptImage),
                     contentScale = ContentScale.Crop
                 )
             }

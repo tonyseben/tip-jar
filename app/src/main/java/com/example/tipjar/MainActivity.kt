@@ -31,7 +31,7 @@ class MainActivity : ComponentActivity() {
 
         enableEdgeToEdge()
         setContent {
-            TipJarTheme {
+            TipJarTheme(dynamicColor = false) {
                 Surface(
                     modifier = Modifier.fillMaxSize()
                 ) {

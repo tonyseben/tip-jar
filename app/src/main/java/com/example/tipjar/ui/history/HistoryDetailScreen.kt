@@ -1,6 +1,7 @@
 package com.example.tipjar.ui.history
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -22,7 +23,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
@@ -32,12 +33,16 @@ import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.example.tipjar.R
+import com.example.tipjar.ui.theme.gray
+import com.example.tipjar.ui.theme.white
 
 @Composable
 fun HistoryDetailScreen(navController: NavController, timestamp: Long, onDismiss: () -> Unit) {
     val viewModel: HistoryDetailViewModel = hiltViewModel()
     val state = viewModel.state.collectAsState()
     viewModel.getHistoryDetail(timestamp)
+
+    val bgColor = if (isSystemInDarkTheme()) gray else white
 
     Dialog(
         onDismissRequest = onDismiss,
@@ -65,21 +70,19 @@ fun HistoryDetailScreen(navController: NavController, timestamp: Long, onDismiss
                                 .data(receiptUri)
                                 .build(),
                             modifier = Modifier.height(350.dp),
-                            contentDescription = "Receipt",
+                            contentDescription = stringResource(R.string.cdReceiptImage),
                             contentScale = ContentScale.Crop
                         )
                     } ?: Row(
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(56.dp)
-                            .background(Color.White)
+                            .background(bgColor)
                             .padding(horizontal = 12.dp, vertical = 16.dp)
                     ) {
                         Text(
-                            text = "No Receipt image available",
-                            fontSize = 13.sp,
-                            modifier = Modifier.weight(1F),
-                            fontWeight = FontWeight.Bold
+                            text = stringResource(R.string.messageNoReceipt),
+                            modifier = Modifier.weight(1F)
                         )
 
                         IconButton(onClick = {
@@ -87,7 +90,7 @@ fun HistoryDetailScreen(navController: NavController, timestamp: Long, onDismiss
                         }) {
                             Icon(
                                 painter = painterResource(id = R.drawable.ic_camera),
-                                contentDescription = "Camera"
+                                contentDescription = stringResource(R.string.cdCamera)
                             )
                         }
                     }
@@ -98,28 +101,27 @@ fun HistoryDetailScreen(navController: NavController, timestamp: Long, onDismiss
                         .clip(RoundedCornerShape(8.dp))
                         .fillMaxWidth()
                         .height(90.dp)
-                        .background(Color.White)
+                        .background(bgColor)
                         .padding(horizontal = 12.dp, vertical = 16.dp)
                 ) {
                     Text(
                         text = state.value.dateTime,
-                        modifier = Modifier.align(Alignment.TopStart),
-                        fontSize = 13.sp,
-                        fontWeight = FontWeight.Bold
+                        modifier = Modifier.align(Alignment.TopStart)
                     )
                     Text(
                         text = "${state.value.currency}${state.value.amount}",
                         modifier = Modifier.align(Alignment.BottomStart),
-                        fontSize = 20.sp,
-                        fontWeight = FontWeight.Bold
+                        fontSize = 20.sp
                     )
                     Text(
-                        text = "Tip: ${state.value.currency}${state.value.totalTip}",
+                        text = stringResource(
+                            R.string.tipValue,
+                            state.value.currency,
+                            state.value.totalTip
+                        ),
                         modifier = Modifier
                             .align(Alignment.BottomEnd)
-                            .alpha(0.5F),
-                        fontSize = 13.sp,
-                        fontWeight = FontWeight.Bold
+                            .alpha(0.5F)
                     )
                 }
             }

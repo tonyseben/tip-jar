@@ -17,13 +17,14 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.tipjar.ui.theme.offWhite
+import com.example.tipjar.ui.theme.orange
 
 @Composable
 @Preview(showBackground = true)
@@ -89,8 +90,8 @@ fun TJTextField(
                 fontSize = 36.sp
             ),
             colors = OutlinedTextFieldDefaults.colors(
-                focusedBorderColor = Color(0xFFF27A0A),
-                unfocusedBorderColor = Color(0xFFD2D2D2)
+                focusedBorderColor = orange,
+                unfocusedBorderColor = offWhite
             ),
             shape = RoundedCornerShape(12.dp),
             singleLine = true,

@@ -4,14 +4,17 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.example.tipjar.ui.theme.offWhite
+import com.example.tipjar.ui.theme.orange
+import com.example.tipjar.ui.theme.orangeGrey
+import com.example.tipjar.ui.theme.orangeLight
+import com.example.tipjar.ui.theme.white
 
 @Composable
 fun TJButton(
@@ -20,30 +23,26 @@ fun TJButton(
     isEnabled: Boolean = true,
     onClick: () -> Unit = {}
 ) {
-    Button(
+    TextButton(
         modifier = modifier
             .fillMaxWidth()
             .background(
                 brush = Brush.verticalGradient(
                     colors = if (isEnabled) {
-                        listOf(
-                            Color(0xFFF27A0A),
-                            Color(0xFFD26E11),
-                        )
+                        listOf(orangeLight, orange)
                     } else {
-                        listOf(
-                            Color(0xFFF27A0A).copy(alpha = 0.5f),
-                            Color(0xFFD26E11).copy(alpha = 0.5f),
-                        )
+                        listOf(orange, orangeGrey)
                     }
                 ),
                 shape = RoundedCornerShape(25)
             )
             .size(width = 48.dp, height = 48.dp),
-        colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent),
         onClick = onClick,
         enabled = isEnabled
     ) {
-        Text(text = label)
+        Text(
+            text = label,
+            color = if (isEnabled) white else offWhite
+        )
     }
 }

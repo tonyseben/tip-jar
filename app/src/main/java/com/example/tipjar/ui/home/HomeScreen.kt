@@ -19,11 +19,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
-import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.example.tipjar.R
 import com.example.tipjar.ui.component.NumberPicker
 import com.example.tipjar.ui.component.TJButton
 import com.example.tipjar.ui.component.TJCheckBox
@@ -45,12 +46,16 @@ fun HomeScreen(navController: NavController) {
 
             isReceiptSaved?.let { saved ->
                 if (saved) {
-                    Toast.makeText(context, "Transaction saved!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        context,
+                        stringResource(R.string.statusTransactSaved),
+                        Toast.LENGTH_SHORT
+                    ).show()
                     navController.navigate("history")
                 } else {
                     Toast.makeText(
                         context,
-                        "Transaction saved! But, receipt not captured.",
+                        stringResource(R.string.statusTransactSavedNoReceipt),
                         Toast.LENGTH_SHORT
                     ).show()
                     navController.navigate("history")
@@ -64,14 +69,18 @@ fun HomeScreen(navController: NavController) {
         viewModel.effect.collect { effect ->
             when (effect) {
                 HomeContract.SideEffect.SaveTipSuccess -> {
-                    Toast.makeText(context, "Transaction saved!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        context,
+                        context.getString(R.string.statusTransactSaved),
+                        Toast.LENGTH_SHORT
+                    ).show()
                     navController.navigate("history")
                 }
 
                 HomeContract.SideEffect.SaveTipFailed -> {
                     Toast.makeText(
                         context,
-                        "Something went wrong. Could not save transaction.",
+                        context.getString(R.string.statusTransactSaveFailed),
                         Toast.LENGTH_SHORT
                     ).show()
                 }
@@ -106,7 +115,7 @@ fun HomeScreen(navController: NavController) {
         ) {
 
             TJTextField(
-                label = "Enter amount",
+                label = stringResource(R.string.labelAmount),
                 value = state.value.amount,
                 hint = "100.00",
                 onChange = {
@@ -119,7 +128,7 @@ fun HomeScreen(navController: NavController) {
             )
 
             NumberPicker(
-                label = "How many people?",
+                label = stringResource(R.string.labelPax),
                 number = state.value.persons.toInt(),
                 onClick = {
                     viewModel.setEvent(HomeContract.Event.OnPersonCountChange(it))
@@ -127,7 +136,7 @@ fun HomeScreen(navController: NavController) {
             )
 
             TJTextField(
-                label = "% TIP",
+                label = stringResource(R.string.labelTipPercent),
                 value = state.value.tipPercentage,
                 hint = "10",
                 onChange = {
@@ -143,16 +152,8 @@ fun HomeScreen(navController: NavController) {
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
-                    Text(
-                        text = "Total Tip",
-                        fontSize = 13.sp,
-                        fontWeight = FontWeight.Bold
-                    )
-                    Text(
-                        text = "${state.value.currency} ${state.value.totalTip}",
-                        fontSize = 13.sp,
-                        fontWeight = FontWeight.Bold
-                    )
+                    Text(text = stringResource(R.string.labelTotalTip))
+                    Text(text = "${state.value.currency} ${state.value.totalTip}")
                 }
 
                 Row(
@@ -160,14 +161,12 @@ fun HomeScreen(navController: NavController) {
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     Text(
-                        text = "Per Person",
-                        fontSize = 18.sp,
-                        fontWeight = FontWeight.Bold
+                        text = stringResource(R.string.labelPaxTip),
+                        fontSize = 18.sp
                     )
                     Text(
                         text = "${state.value.currency} ${state.value.perPersonTip}",
-                        fontSize = 18.sp,
-                        fontWeight = FontWeight.Bold
+                        fontSize = 18.sp
                     )
                 }
             }
@@ -180,14 +179,14 @@ fun HomeScreen(navController: NavController) {
                     verticalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
                     TJCheckBox(
-                        label = "Take photo of receipt",
+                        label = stringResource(R.string.labelTakePhoto),
                         isChecked = state.value.isReceipt,
                         onCheckedChange = {
                             viewModel.setEvent(HomeContract.Event.OnReceiptChange)
                         }
                     )
                     TJButton(
-                        label = "Save Payment",
+                        label = stringResource(R.string.actionSavePayment),
                         isEnabled = state.value.isSaveEnabled,
                         onClick = {
                             viewModel.setEvent(HomeContract.Event.SaveTip)

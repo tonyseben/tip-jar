@@ -21,12 +21,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.tipjar.ui.theme.offWhite
+import com.example.tipjar.ui.theme.orange
 
 @Composable
 @Preview(showBackground = true)
@@ -37,11 +37,7 @@ fun NumberPicker(label: String = "", number: Int = 0, onClick: (Char) -> Unit = 
     SideEffect { oldNumber = number }
 
     Column {
-        Text(
-            text = label,
-            fontSize = 13.sp,
-            fontWeight = FontWeight.Bold
-        )
+        Text(text = label)
         Row(
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -74,7 +70,7 @@ fun NumberPicker(label: String = "", number: Int = 0, onClick: (Char) -> Unit = 
 fun OpButton(operator: Char, onClick: (Char) -> Unit = {}) {
     val interactionSource = remember { MutableInteractionSource() }
     val isPressed by interactionSource.collectIsPressedAsState()
-    val borderColor = if (isPressed) Color(0xFFF27A0A) else Color(0xFFD2D2D2)
+    val borderColor = if (isPressed) orange else offWhite
 
     OutlinedButton(
         modifier = Modifier.size(72.dp),
@@ -86,7 +82,7 @@ fun OpButton(operator: Char, onClick: (Char) -> Unit = {}) {
         Text(
             text = operator.toString(),
             fontSize = 36.sp,
-            color = Color(0xFFF27A0A)
+            color = orange
         )
     }
 }
